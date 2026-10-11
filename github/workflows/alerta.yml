@@ -1,0 +1,19 @@
+name: ntfy-alert
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar notificación a ntfy.sh
+        run: |
+          curl -sSf \
+            -H "Title: Nuevo push en main" \
+            -H "Tags: white_check_mark,rocket" \
+            -d "Se hizo un push al repositorio main. Repositorio: ${{ github.repository }}. Commit: ${{ github.sha }}" \
+            "https://ntfy.sh/devops-itla"
